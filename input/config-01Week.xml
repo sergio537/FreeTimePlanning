@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config SYSTEM "http://www.matsim.org/files/dtd/config_v1.dtd">
+<config>
+
+<!-- ====================================================================== -->
+
+	<module name="global" >
+		<param name="coordinateSystem" value="WGS84_UTM48N" />
+		<param name="numberOfThreads" value="4" />
+		<param name="randomSeed" value="47114657475" />
+	</module>
+
+<!-- ====================================================================== -->
+
+	<module name="plans" >
+		<param name="inputPlansFile" value="./input/population/semiRoutedPopulationWeekRandomPR001.xml.gz" />
+	</module>
+	
+<!-- ====================================================================== -->
+
+	<module name="network" >
+		<param name="inputNetworkFile" value="./input/network/singapore7.xml" />
+	</module>
+
+<!-- ====================================================================== -->
+
+	<module name="facilities" >
+		<param name="inputFacilitiesFile" value="./input/facilities/facilitiesWeek.xml.gz" />
+	</module>
+		
+<!-- ====================================================================== -->
+
+	<module name="controler" >
+		<param name="outputDirectory" value="./output" />
+		<param name="firstIteration" value="0" />
+		<param name="lastIteration" value="50" />
+		<param name="writeEventsInterval" value="10" />
+		<param name="eventsFileFormat" value="xml" />
+		<param name="writePlansInterval" value="5" />
+		<param name="routingAlgorithmType" value="FastDijkstra" />
+		<param name="mobsim" value="qsim" />
+	</module>
+	
+<!-- ====================================================================== -->
+
+	<module name="scenario" >
+		<!-- Set this parameter to true if transit should be simulated, false if not. -->
+		<param name="useTransit" value="false" />
+		<!-- Set this parameter to true if vehicles should be used, false if not. -->
+		<param name="useVehicles" value="false" />
+	</module>
+
+<!-- ====================================================================== -->
+
+	<module name="qsim" >
+		<param name="startTime" value="00:00:00" />
+		<param name="endTime" value="168:00:00" />
+		<param name="flowCapacityFactor" value="0.05" />
+		<param name="storageCapacityFactor" value="0.15" />
+		<param name="numberOfThreads" value="2" />
+		<!-- Boolean. `true': stuck vehicles are removed, aborting the plan; `false': stuck vehicles are forced into the next link. `false' is probably the better choice. -->
+		<param name="removeStuckVehicles" value="false" />
+		<!-- time in seconds.  Time after which the frontmost vehicle on a link is called `stuck' if it does not move. -->
+		<param name="stuckTime" value="10.0" />
+		<param name="timeStepSize" value="00:00:01" />
+
+	</module>
+	
+<!-- ====================================================================== -->
+
+	<module name="transit" >
+		<!-- Comma-separated list of transportation modes that are handled as transit. Defaults to 'pt,bus,train,tram'. -->
+		<param name="transitModes" value="pt,bus,subway,tram,rail" />
+		<param name="transitScheduleFile" value="./input/transit/transitScheduleWeek.xml" />
+		<param name="vehiclesFile" value="./input/transit/vehicles05Week.xml.gz" />
+	</module>
+
+<!-- ====================================================================== -->
+
+	<module name="roadpricing" >
+		<param name="tollLinksFile" value="./input/tolls/carERP.xml" />
+	</module>
+	
+
+<!-- ====================================================================== -->
+
+	<module name="planscalcroute" >
+		<param name="networkModes" value="car" />
+		
+		<!-- factor with which beeline distances (and therefore times) are multiplied in order to obtain an estimate of the network distances/times.  Default is something like 1.3 -->
+		<param name="beelineDistanceFactor" value="1.3" />
+		<param name="ptSpeed" value="4.166666666666667" />
+		
+		<!-- Allowed values: freespeed, beeline. Determines if travel times for non-simulated pt legs are estimated by ptSpeedFactor * <freespeed car travel time> ("freespeed") or by (<beeline distance> * beelineDistanceFactor) / ptSpeed ("beeline") -->
+		<param name="undefinedModeSpeed" value="13.88888888888889" />
+		<param name="walkSpeed" value="1.11111111111111" />
+	</module>
+
+<!-- ====================================================================== -->
+
+	<module name="planCalcScore" >
+		<param name="activityPriority_0"        value="1" />
+		<param name="activityType_0" value="home" />
+		<param name="activityTypicalDuration_0" value="08:00:00" />
+		<param name="activityMinimalDuration_0" value="02:00:00" />
+		
+		<param name="activityType_1" value="w_0645_0815" />
+		<param name="activityPriority_1"        value="1" />
+		<param name="activityTypicalDuration_1" value="08:15:00" />
+		<param name="activityMinimalDuration_1" value="07:45:00" />
+		
+		<param name="activityType_2" value="w_0730_1000" />
+		<param name="activityPriority_2"        value="1" />
+		<param name="activityTypicalDuration_2" value="10:00:00" />
+		<param name="activityMinimalDuration_2" value="09:30:00" />
+		
+		<param name="activityType_3" value="w_0730_1145" />
+		<param name="activityPriority_3"        value="1" />
+		<param name="activityTypicalDuration_3" value="11:45:00" />
+		<param name="activityMinimalDuration_3" value="11:15:00" />
+		
+		<param name="activityType_4" value="w_0730_1345" />
+		<param name="activityPriority_4"        value="1" />
+		<param name="activityTypicalDuration_4" value="13:45:00" />
+		<param name="activityMinimalDuration_4" value="13:15:00" />
+		
+		<param name="activityType_5" value="w_0830_0915" />
+		<param name="activityPriority_5"        value="1" />
+		<param name="activityTypicalDuration_5" value="09:15:00" />
+		<param name="activityMinimalDuration_5" value="08:45:00" />
+		
+		<param name="activityType_6" value="w_0900_1015" />
+		<param name="activityPriority_6"        value="1" />
+		<param name="activityTypicalDuration_6" value="10:15:00" />
+		<param name="activityMinimalDuration_6" value="09:45:00" />
+		
+		<param name="activityType_7" value="w_0945_0800" />
+		<param name="activityPriority_7"        value="1" />
+		<param name="activityTypicalDuration_7" value="08:00:00" />
+		<param name="activityMinimalDuration_7" value="07:30:00" />
+		
+		<param name="activityType_8" value="w_0945_1145" />
+		<param name="activityPriority_8"        value="1" />
+		<param name="activityTypicalDuration_8" value="11:45:00" />
+		<param name="activityMinimalDuration_8" value="11:15:00" />
+		
+		<param name="activityType_9" value="w_1345_0845" />
+		<param name="activityPriority_9"        value="1" />
+		<param name="activityTypicalDuration_9" value="08:45:00" />
+		<param name="activityMinimalDuration_9" value="08:15:00" />
+		
+		<param name="activityType_10" value="w_2015_0945" />
+		<param name="activityPriority_10"        value="1" />
+		<param name="activityTypicalDuration_10" value="09:45:00" />
+		<param name="activityMinimalDuration_10" value="09:15:00" />
+		
+		<param name="activityType_16" value="s_preschool" />
+		<param name="activityPriority_16"        value="1" />
+		<param name="activityTypicalDuration_16" value="04:00:00" />
+		<param name="activityMinimalDuration_16" value="03:30:00" />
+		
+		<param name="activityType_17" value="s_primary" />
+		<param name="activityPriority_17"        value="1" />
+		<param name="activityTypicalDuration_17" value="07:00:00" />
+		<param name="activityMinimalDuration_17" value="06:30:00" />
+		
+		<param name="activityType_18" value="s_secondary" />
+		<param name="activityPriority_18"        value="1" />
+		<param name="activityTypicalDuration_18" value="07:30:00" />
+		<param name="activityMinimalDuration_18" value="07:00:00" />
+		
+		<param name="activityType_19" value="s_postsecondary" />
+		<param name="activityPriority_19"        value="1" />
+		<param name="activityTypicalDuration_19" value="08:00:00" />
+		<param name="activityMinimalDuration_19" value="07:30:00" />
+		
+		<param name="activityType_20" value="s_tertiary" />
+		<param name="activityPriority_20"        value="1" />
+		<param name="activityTypicalDuration_20" value="08:00:00" />
+		<param name="activityMinimalDuration_20" value="07:30:00" />
+		
+		<param name="activityType_21" value="s_other" />
+		<param name="activityPriority_21"        value="1" />
+		<param name="activityTypicalDuration_21" value="07:00:00" />
+		<param name="activityMinimalDuration_21" value="06:30:00" />
+		
+		<param name="activityType_22" value="biz" />
+		<param name="activityPriority_22"        value="0.9" />
+		<param name="activityTypicalDuration_22" value="01:00:00" />
+		<param name="activityMinimalDuration_22" value="00:30:00" />
+		
+		<param name="activityType_23" value="eat" />
+		<param name="activityPriority_23"        value="0.9" />
+		<param name="activityTypicalDuration_23" value="01:00:00" />
+		<param name="activityMinimalDuration_23" value="00:20:00" />
+		
+		<param name="activityType_24" value="errand" />
+		<param name="activityPriority_24"        value="0.8" />
+		<param name="activityTypicalDuration_24" value="00:45:00" />
+		<param name="activityMinimalDuration_24" value="00:15:00" />
+		
+		<param name="activityType_25" value="fun" />
+		<param name="activityPriority_25"        value="0.3" />
+		<param name="activityTypicalDuration_25" value="02:00:00" />
+		<param name="activityMinimalDuration_25" value="01:00:00" />
+		
+		<param name="activityType_26" value="medi" />
+		<param name="activityPriority_26"        value="1" />
+		<param name="activityTypicalDuration_26" value="00:30:00" />
+		<param name="activityMinimalDuration_26" value="00:15:00" />
+		
+		<param name="activityType_27" value="rec" />
+		<param name="activityPriority_27"        value="0.3" />
+		<param name="activityTypicalDuration_27" value="02:00:00" />
+		<param name="activityMinimalDuration_27" value="01:00:00" />
+		
+		<param name="activityType_28" value="shop" />
+		<param name="activityPriority_28"        value="0.2" />
+		<param name="activityTypicalDuration_28" value="02:00:00" />
+		<param name="activityMinimalDuration_28" value="00:15:00" />
+		
+		<param name="activityType_29" value="social" />
+		<param name="activityPriority_29"        value="0.3" />
+		<param name="activityTypicalDuration_29" value="01:00:00" />
+		<param name="activityMinimalDuration_29" value="00:15:00" />
+		
+		<param name="activityType_30" value="sport" />
+		<param name="activityPriority_30"        value="0.4" />
+		<param name="activityTypicalDuration_30" value="02:00:00" />
+		<param name="activityMinimalDuration_30" value="00:20:00" />
+		
+		<!-- [utils] alternative-specific constant for pt.  no guarantee that this is used anywhere. default=0 to be backwards compatible for the time being -->
+		<param name="constantPt" value="-0.392" />
+
+		<!-- [utils] alternative-specific constant for walk.  no guarantee that this is used anywhere. default=0 to be backwards compatible for the time being -->
+		<param name="constantWalk" value="0.0" />
+		
+		<!-- [utils/hr] utility for departing early (i.e. before the earliest end time).  Probably implemented correctly, but not tested. -->
+		<param name="earlyDeparture" value="-0.0" />
+
+		<!-- [utils/hr] utility for arriving late (i.e. after the latest start time).  normally negative -->
+		<param name="lateArrival" value="-18.0" />
+
+		<!-- new_score = (1-learningRate)*old_score + learningRate * score_from_mobsim.  learning rates close to zero emulate score averaging, but slow down initial convergence -->
+		<param name="learningRate" value="1.0" />
+
+		<!-- [utils/unit_of_money] conversion of money (e.g. toll, distance cost) into utils -->
+		<param name="marginalUtilityOfMoney" value="1.0" />
+
+		<!-- DISCOURAGED! [utils/m] utility of walking per m, normally negative.  this is on top of the time (dis)utility.  It is discouraged to use this but in some cases it may make sense. -->
+		<param name="marginalUtlOfDistanceWalk" value="0.0" />
+
+		<!-- [unit_of_money/m] conversion of car distance into money -->
+		<param name="monetaryDistanceCostRateCar" value="-1.47E-4" />
+
+		<!-- [unit_of_money/m] conversion of pt distance into money -->
+		<param name="monetaryDistanceCostRatePt" value="0.0" />
+
+		<!-- [utils/hr] marginal utility of doing an activity.  normally positive.  also the opportunity cost of time if agent is doing nothing. -->
+		<param name="performing" value="6.0" />
+
+		<!-- [utils/hr] additional marginal utility of traveling by car.  normally negative.  this comes on top of the opportunity cost of time -->
+		<param name="traveling" value="-8.05714" />
+		<param name="travelingBike" value="-6.0" />
+
+		<!-- [utils/hr] additional marginal utility offset of traveling by pt.  normally negative.  this comes on top of the opportunity cost of time -->
+		<param name="travelingPt" value="-8.05714" />
+
+		<!-- [utils/hr] additional marginal utility offset of traveling by foot.  normally negative.  this comes on top of the opportunity cost of time.  also see marginalUtlOfDistanceWalk -->
+		<param name="travelingWalk" value="-16.92" />
+
+		<!-- [utils] utility of switching a line (= transfer penalty).  Normally negative -->
+		<param name="utilityOfLineSwitch" value="-0.64457" />
+
+		<!-- [utils/hr] utility offset for waiting.  this comes on top of the opportunity cost of time.  Probably implemented correctly, but not tested. -->
+		<param name="waitingPt" value="-12.89143" />
+	</module>
+	
+<!-- ====================================================================== -->
+
+	<module name="strategy" >
+		<!-- probability that a strategy is applied to a given a person.  despite its name, this really is a ``weight'' -->
+		<param name="ModuleProbability_1" value="0.666666" />
+		<param name="ModuleProbability_2" value="0.083333" />
+		<param name="ModuleProbability_3" value="0.083333" />
+		<param name="ModuleProbability_4" value="0.083333" />
+		
+		<!-- name of strategy (if not full class name, resolved in StrategyManagerConfigLoader) -->
+		<param name="Module_1" value="SelectExpBeta" />
+		<param name="Module_2" value="ReRouteBase" />
+		<param name="Module_3" value="TimeAllocationBase" />
+		<param name="Module_4" value="TripSubtourModeChoiceBase" />
+		<!-- maximum number of plans per agent.  ``0'' means ``infinity''.  Currently (2010), ``5'' is a good number -->
+		<param name="maxAgentPlanMemorySize" value="5" />
+	</module>
+
+<!-- ====================================================================== -->
+
+	<module name="TimeAllocationMutator" >
+		<param name="mutationRange" value="1800" />
+	</module>
+
+<!-- ====================================================================== -->
+
+	<module name="subtourModeChoice" >
+		<param name="chainBasedModes" value="car" />
+		<param name="modes" value="car, pt" />
+	</module>
+
+<!-- ====================================================================== -->
+	
+	<module name="locationchoice" >
+		<param name="algorithm" value="localSearchRecursive" />
+		<param name="destinationSamplePercent" value="5.0" />
+		<param name="epsilonDistribution" value="gumbel" />
+		<param name="flexible_types" value="biz, eat, errand, fun, rec, shop, social, sport" />
+		<param name="maxRecursions" value="5" />
+		<param name="planSelector" value="SelectExpBeta" />
+		<param name="probChoiceExponent" value="3" />
+		<param name="probChoiceSetSize" value="10" />
+		<param name="randomSeed" value="221177" />
+		<param name="recursionTravelSpeedChange" value="0.1" />
+		<param name="restraintFcnExp" value="5" />
+		<param name="restraintFcnFactor" value="0.13168724279" />
+		<param name="scaleFactor" value="4" />
+		<param name="tt_approximationLevel" value="0" />
+	</module>
+
+</config>
